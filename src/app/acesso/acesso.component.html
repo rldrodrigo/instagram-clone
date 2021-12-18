@@ -7,7 +7,7 @@
 
     <div class="col-sm-6 d-flex justify-content-start" [@animacao-painel]="estadoPainel">
       <div *ngIf="cadastro; else formLogin">
-        <app-cadastro></app-cadastro>
+        <app-cadastro (exibirPainel)="exibirPainel($event)"></app-cadastro>
       </div>
       <ng-template #formLogin>
         <app-login></app-login>

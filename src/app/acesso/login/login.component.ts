@@ -7,13 +7,11 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  @Output() public exibirPainel: EventEmitter<string> = new EventEmitter<string>()
-
+  @Output() public exibirPainel: EventEmitter<string> = new EventEmitter()
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit() {
   }
-
   public exibirPainelCadastro(): void {
     this.exibirPainel.emit('cadastro')
   }
