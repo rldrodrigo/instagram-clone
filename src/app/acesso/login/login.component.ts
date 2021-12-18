@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
   public exibirPainelCadastro(): void {
+
     this.exibirPainel.emit('cadastro')
   }
 }
