@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 /* Estado void, é um estado especial, ele é um estado
 reservado da biblioteca de animações do angular que faz
@@ -25,7 +25,20 @@ criado na árvore de elementos do DOM
       })),
       transition('void => criado', [
         style({ opacity: 0, transform: 'translate(50px, 0' }),
-        animate('500ms 0s ease-in-out') //duração, delay e aceleração
+
+        //---------------------------------------------- //
+        animate('1.5s 0s ease-in-out', keyframes([
+          style({ offset: 0.15, opacity: 1, transform: 'translateX(0)' }),
+          style({ offset: 0.86, opacity: 1, transform: 'translateX(0)' }),
+
+          style({ offset: 0.88, opacity: 1, transform: 'translateY(-10px)' }),
+          style({ offset: 0.90, opacity: 1, transform: 'translateY(10px)' }),
+          style({ offset: 0.92, opacity: 1, transform: 'translateY(-10px)' }),
+          style({ offset: 0.94, opacity: 1, transform: 'translateY(10px)' }),
+          style({ offset: 0.96, opacity: 1, transform: 'translateY(-10px)' }),
+          style({ offset: 0.98, opacity: 1, transform: 'translateY(10px)' }),
+          style({ offset: 1, opacity: 1, transform: 'translateY(0)' }),
+        ])) //duração, delay e aceleração
       ])
     ])
   ]
@@ -43,5 +56,14 @@ export class AcessoComponent implements OnInit {
   }
   public exibirPainel(event: string): void {
     this.cadastro = event === 'cadastro' ? true : false
+  }
+
+
+  public inicioDaAnimacao(): void {
+    console.log('inicio da animação')
+  }
+
+  public fimDaAnimacao(): void {
+    console.log('fim da animação')
   }
 }
