@@ -2,9 +2,9 @@ import { Usuario } from "./acesso/usuario.model"
 import * as firebase from "firebase"
 
 export class Autenticacao {
-    public cadastrarUsuario(usuario: Usuario): void {
+    public cadastrarUsuario(usuario: Usuario): Promise<any> {
 
-        firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
+        return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
             .then((resposta: any) => {
 
                 //remove a senha do atributo senha do usuario
