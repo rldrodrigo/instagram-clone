@@ -27,3 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ![image](https://user-images.githubusercontent.com/51513403/146649000-6405a95b-371d-46d0-9761-4121bc02d002.png)
+
+
+Instalação do SDK do Firebase
+npm install --save firebase@4.5.1 
