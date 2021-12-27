@@ -47,10 +47,20 @@ export class Autenticacao {
 
     public autenticado(): boolean {
 
-        if (this.token_id === undefined && localStorage.getItem('idToken') != null) {
+        if (this.token_id === '' && localStorage.getItem('idToken') != null) {
             // @ts-expect-error Ignora o erro de estar atribuindo null porém já está sendo tratado no null
             this.token_id = localStorage.getItem('idToken')
         }
-        return (this.token_id !== undefined)
+        return (this.token_id !== '')
+    }
+
+    public sair(): void {
+        firebase.auth().signOut()
+            .then(() => {
+                localStorage.removeItem('idToken')
+                this.token_id = ''
+                this.router.navigate(['/'])
+            })
+
     }
 }
