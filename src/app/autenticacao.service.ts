@@ -51,6 +51,11 @@ export class Autenticacao {
             // @ts-expect-error Ignora o erro de estar atribuindo null porém já está sendo tratado no null
             this.token_id = localStorage.getItem('idToken')
         }
+
+        if (this.token_id === '') {
+            this.router.navigate(['/'])
+        }
+
         return (this.token_id !== '')
     }
 
