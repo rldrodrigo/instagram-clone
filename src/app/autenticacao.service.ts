@@ -38,6 +38,7 @@ export class Autenticacao {
                 firebase.auth().currentUser?.getIdToken()
                     .then((idToken: string) => {
                         this.token_id = idToken
+                        localStorage.setItem('idToken', idToken) //Passa como parametro chave / valor
                         this.router.navigate(['/home'])
                     })
             })
@@ -46,6 +47,10 @@ export class Autenticacao {
 
     public autenticado(): boolean {
 
-        return this.token_id !== undefined
+        if (this.token_id === undefined && localStorage.getItem('idToken') != null) {
+            // @ts-expect-error Ignora o erro de estar atribuindo null porém já está sendo tratado no null
+            this.token_id = localStorage.getItem('idToken')
+        }
+        return (this.token_id !== undefined)
     }
 }
