@@ -46,17 +46,22 @@ export class Bd {
 
                     let publicacao = childSnapshot.val()
 
-                    //consultar a url da imagem
+                    //consultar a url da imagem (storage)
                     firebase.storage().ref()
                         .child(`imagens/${childSnapshot.key}`)
                         .getDownloadURL()
                         .then((url: string) => {
                             publicacao.url_imagem = url
 
-                            publicacoes.push(publicacao)
+                            //consultar o nome do usuário responsável pela publicação
+                            firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
+                                .once('value')
+                                .then((snapshot: any) => {
+                                    publicacao.nome_usuario = snapshot.val().nome_usuario
+                                    publicacoes.push(publicacao)
+                                })
                         })
                 });
-
                 console.log(publicacoes)
             })
     }
