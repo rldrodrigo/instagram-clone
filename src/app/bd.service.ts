@@ -48,10 +48,17 @@ export class Bd {
                     snapshot.forEach((childSnapshot: any) => {
 
                         let publicacao = childSnapshot.val()
+                        publicacao.key = childSnapshot.key
 
+                        publicacoes.push(publicacao)
+                    });
+                    return publicacoes.reverse()
+                })
+                .then((publicacoes: any) => {
+                    publicacoes.forEach((publicacao: any) => {
                         //consultar a url da imagem (storage)
                         firebase.storage().ref()
-                            .child(`imagens/${childSnapshot.key}`)
+                            .child(`imagens/${publicacao.key}`)
                             .getDownloadURL()
                             .then((url: string) => {
                                 publicacao.url_imagem = url
@@ -61,14 +68,11 @@ export class Bd {
                                     .once('value')
                                     .then((snapshot: any) => {
                                         publicacao.nome_usuario = snapshot.val().nome_usuario
-                                        publicacoes.push(publicacao)
                                     })
                             })
-                    });
+                    })
                     resolve(publicacoes)
                 })
         })
-
-
     }
 }
