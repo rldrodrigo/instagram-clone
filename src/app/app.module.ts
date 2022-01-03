@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Autenticacao } from './autenticacao.service';
 import { AutenticacaoGuard } from './autenticacao-guard.service';
 import { Bd } from './bd.service';
+import { Progresso } from './progresso.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,7 @@ import { CadastroComponent } from './acesso/cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-pu
   providers: [
     Autenticacao,
     AutenticacaoGuard,
-    Bd
+    Bd,
+    Progresso
   ],
   bootstrap: [AppComponent]
 })
