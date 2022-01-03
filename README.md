@@ -15,3 +15,5 @@ npm i @angular/animations@latest --save
 
 Install Firebase SDK:
 npm install --save firebase@4.5.1 
+
+![image](https://user-images.githubusercontent.com/51513403/147978305-48dbcd9b-9036-475a-ab52-08d915b69e8b.png)
