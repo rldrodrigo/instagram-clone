@@ -48,7 +48,7 @@ export class IncluirPublicacaoComponent implements OnInit {
       imagem: this.imagem[0]
     })
 
-    let acompanhamentoUpload = interval(100)
+    let acompanhamentoUpload = interval(500)
 
     let continua = new Subject()
 
@@ -57,8 +57,6 @@ export class IncluirPublicacaoComponent implements OnInit {
     acompanhamentoUpload
       .pipe(takeUntil(continua))
       .subscribe(() => {
-        //console.log(this.progresso.status)
-        //console.log(this.progresso.estado)
         this.progressoPublicacao = 'andamento'
         this.porcentagemUpload = Math.round((this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes) * 100)
 

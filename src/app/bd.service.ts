@@ -9,6 +9,7 @@ export class Bd {
 
     public publicar(publicacao: any): void {
 
+
         firebase.database().ref(`publicacoes/${btoa(publicacao.email)}`)
             .push({ titulo: publicacao.titulo })
             .then((resposta: any) => {
@@ -31,6 +32,14 @@ export class Bd {
                             this.progresso.status = 'concluido'
                         }
                     )
+            })
+    }
+
+    public consultaPublicacoes(emailUsuario: string): any {
+        firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+            .once('value')
+            .then((snapshot: any) => {
+                console.log(snapshot.val())
             })
     }
 }
