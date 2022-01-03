@@ -35,34 +35,40 @@ export class Bd {
             })
     }
 
-    public consultaPublicacoes(emailUsuario: string): any {
-        firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
-            .once('value')
-            .then((snapshot: any) => {
-                //console.log(snapshot.val())
-                let publicacoes: Array<any> = [];
+    public consultaPublicacoes(emailUsuario: string): Promise<any> {
+        return new Promise((resolve, reject) => {
 
-                snapshot.forEach((childSnapshot: any) => {
+            //consultar as publicações (database)
+            firebase.database().ref(`publicacoes/${btoa(emailUsuario)}`)
+                .once('value')
+                .then((snapshot: any) => {
+                    //console.log(snapshot.val())
+                    let publicacoes: Array<any> = [];
 
-                    let publicacao = childSnapshot.val()
+                    snapshot.forEach((childSnapshot: any) => {
 
-                    //consultar a url da imagem (storage)
-                    firebase.storage().ref()
-                        .child(`imagens/${childSnapshot.key}`)
-                        .getDownloadURL()
-                        .then((url: string) => {
-                            publicacao.url_imagem = url
+                        let publicacao = childSnapshot.val()
 
-                            //consultar o nome do usuário responsável pela publicação
-                            firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
-                                .once('value')
-                                .then((snapshot: any) => {
-                                    publicacao.nome_usuario = snapshot.val().nome_usuario
-                                    publicacoes.push(publicacao)
-                                })
-                        })
-                });
-                console.log(publicacoes)
-            })
+                        //consultar a url da imagem (storage)
+                        firebase.storage().ref()
+                            .child(`imagens/${childSnapshot.key}`)
+                            .getDownloadURL()
+                            .then((url: string) => {
+                                publicacao.url_imagem = url
+
+                                //consultar o nome do usuário responsável pela publicação
+                                firebase.database().ref(`usuario_detalhe/${btoa(emailUsuario)}`)
+                                    .once('value')
+                                    .then((snapshot: any) => {
+                                        publicacao.nome_usuario = snapshot.val().nome_usuario
+                                        publicacoes.push(publicacao)
+                                    })
+                            })
+                    });
+                    resolve(publicacoes)
+                })
+        })
+
+
     }
 }
